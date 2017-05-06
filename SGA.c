@@ -4,8 +4,9 @@
 const unsigned short NPARAMS = 2;
 const unsigned short NIND = 1;
 const unsigned short NBITS[] = {2, 4};
-const double LLIMIT = 0;
-const double ULIMIT = 10;
+#define LLIMIT 0
+#define ULIMIT 10
+double RANGE = ULIMIT - LLIMIT;
 
 #include "INDIVIDUAL-init.h"
 

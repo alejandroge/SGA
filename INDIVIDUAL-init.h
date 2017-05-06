@@ -16,7 +16,8 @@ unsigned char * allocChromosome(unsigned short ncbits);
 void initChromosome(INDIVIDUAL * ind);
 void showChromosome(INDIVIDUAL * ind);
 void initGenes(INDIVIDUAL * ind);
-void computeRealValue(INDIVIDUAL * ind);
+void computeRealValues(INDIVIDUAL * ind);
+unsigned int binaryPower(unsigned short n);
 void showGenes(INDIVIDUAL * ind);
 
 ///////////////////// Functions implementations
@@ -30,10 +31,10 @@ unsigned char initIndividual(INDIVIDUAL * ind) {
   ind->chromosome = allocChromosome(ind->ncbits);
   if(ind->chromosome == NULL) return 1;
   initChromosome(ind);
-  showChromosome(ind);
+  //showChromosome(ind);
 
   initGenes(ind);
-  showGenes(ind);
+  //showGenes(ind);
   return 0;
 }
 
@@ -107,6 +108,7 @@ void initGenes(INDIVIDUAL * ind) {
   for( i=0 , j=0 ; i < NPARAMS ; j += ind->bitsPerGene[i] , i++) {
     ind->gene[i] = ind->chromosome+j;
   } printf("Genes initialized\n");
+  computeRealValues(ind);
 }
 
 void computeRealValues(INDIVIDUAL * ind) {
@@ -115,11 +117,19 @@ void computeRealValues(INDIVIDUAL * ind) {
 
   // Compute realValues for each gene
   for(i=0; i<NPARAMS; i++) {
+    // Following for cycle converts raw binary to decimal values
     dValue = 0;
-    for(j = ind->bitsPerGene[i] ; j >= 0; j--) {
-      // ind->gene[i]
+    for(j = ind->bitsPerGene[i]-1, k=0 ; k<ind->bitsPerGene[i]; j--, k++) {
+      if( ind->gene[i][j] == 1) dValue += binaryPower(k);
     }
+    // Real Value its compute based on lower and upper limits, and decimal value
+    ind->value[i] = ((double)dValue/binaryPower(ind->bitsPerGene[i])*RANGE)+LLIMIT;
   }
+}
+
+unsigned int binaryPower(unsigned short n) {
+  if(n == 0) return 1;
+  else return 2*binaryPower(n-1);
 }
 
 void showGenes(INDIVIDUAL * ind) {
@@ -129,6 +139,6 @@ void showGenes(INDIVIDUAL * ind) {
     printf("Gene[%u] = ", i);
     for( j=0 ; j < ind->bitsPerGene[i] ; j++) {
       printf("%u", ind->gene[i][j]);
-    } printf("\n");
+    } printf("\tReal Value = %g\n", ind->value[i]);
   }
 }
