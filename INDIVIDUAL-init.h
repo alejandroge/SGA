@@ -39,7 +39,6 @@ unsigned char initIndividual(INDIVIDUAL * ind) {
 }
 
 INDIVIDUAL * allocIndividual() {
-  int i;
   INDIVIDUAL *ind;
   ind = (INDIVIDUAL*)malloc(sizeof(INDIVIDUAL));
   // Allocate bitsPerGene and Genes arrays
@@ -50,7 +49,7 @@ INDIVIDUAL * allocIndividual() {
   if(ind->gene == NULL || ind->bitsPerGene == NULL || ind->value == NULL){
     printf("Failed trying to allocate memory for Genes and bitsPerGene arrays\n");
     return NULL;
-  } printf("Individual allocated\n");
+  } // printf("Individual allocated\n");
 
   return ind;
 }
@@ -62,7 +61,7 @@ void initBitsPerGene(INDIVIDUAL * ind) {
   for(i=0; i<NPARAMS; i++) {
     ind->bitsPerGene[i] = NBITS[i];
     ind->ncbits += NBITS[i];
-  } printf("bitsPerGene array initialized\n");
+  } // printf("bitsPerGene array initialized\n");
 }
 
 void showGenesSize(INDIVIDUAL * ind) {
@@ -70,7 +69,7 @@ void showGenesSize(INDIVIDUAL * ind) {
 
   for(i=0; i<NPARAMS; i++){
     printf("bitsPerGene[%u]= %u\n", i, ind->bitsPerGene[i]);
-  } printf("\n");
+  }
 }
 
 unsigned char * allocChromosome(unsigned short ncbits) {
@@ -90,7 +89,7 @@ void initChromosome(INDIVIDUAL * ind) {
   // Initialize randomly chromosome array
   for(i=0; i<ind->ncbits; i++) {
     ind->chromosome[i] = rand()/(double)RAND_MAX > 0.5 ? 1 : 0;
-  } printf("Chromosome randomly initialized\n");
+  } // printf("Chromosome randomly initialized\n");
 }
 
 void showChromosome(INDIVIDUAL * ind) {
@@ -98,7 +97,7 @@ void showChromosome(INDIVIDUAL * ind) {
 
   for(i=0; i<ind->ncbits; i++){
     printf("%u", ind->chromosome[i]);
-  } printf("\n\n");
+  } printf("\n");
 }
 
 void initGenes(INDIVIDUAL * ind) {
@@ -107,7 +106,7 @@ void initGenes(INDIVIDUAL * ind) {
   // Point array of pointers to head of genes in the chromosome
   for( i=0 , j=0 ; i < NPARAMS ; j += ind->bitsPerGene[i] , i++) {
     ind->gene[i] = ind->chromosome+j;
-  } printf("Genes initialized\n");
+  } // printf("Genes initialized\n");
   computeRealValues(ind);
 }
 
