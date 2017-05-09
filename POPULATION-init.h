@@ -1,5 +1,6 @@
-unsigned char initPopulation(INDIVIDUAL * ppltn);
-INDIVIDUAL * allocPopulation();
+unsigned char initPopulation(INDIVIDUAL * ppltn); // Iterates over each Individual in the population
+INDIVIDUAL * allocPopulation();                   // Allocate each Individual in the population
+void showPopulation(INDIVIDUAL * ppltn);
 
 unsigned char initPopulation(INDIVIDUAL * ppltn) {
   unsigned short i;
@@ -32,4 +33,14 @@ INDIVIDUAL * allocPopulation() {
   } printf("Population allocated\n");
 
   return ppltn;
+}
+
+void showPopulation(INDIVIDUAL * ppltn) {
+  unsigned short i;
+
+  for(i=0; i<NIND; i++) {
+    printf("\tIndividual %u\n", i);
+    showGenes(ppltn+i);
+    showFitness(ppltn+i);
+  }
 }

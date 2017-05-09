@@ -19,6 +19,7 @@ void initGenes(INDIVIDUAL * ind);
 void computeRealValues(INDIVIDUAL * ind);
 unsigned int binaryPower(unsigned short n);
 void showGenes(INDIVIDUAL * ind);
+void showFitness(INDIVIDUAL * ind);
 
 ///////////////////// Functions implementations
 unsigned char initIndividual(INDIVIDUAL * ind) {
@@ -35,6 +36,8 @@ unsigned char initIndividual(INDIVIDUAL * ind) {
 
   initGenes(ind);
   //showGenes(ind);
+
+  ind->fitness = 0;
   return 0;
 }
 
@@ -140,4 +143,8 @@ void showGenes(INDIVIDUAL * ind) {
       printf("%u", ind->gene[i][j]);
     } printf("\tReal Value = %g\n", ind->value[i]);
   }
+}
+
+void showFitness(INDIVIDUAL * ind) {
+  printf("Fitness: %g\n", ind->fitness);
 }
