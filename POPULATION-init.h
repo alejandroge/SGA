@@ -39,7 +39,7 @@ void showPopulation(INDIVIDUAL * ppltn) {
   unsigned short i;
 
   for(i=0; i<NIND; i++) {
-    printf("\tIndividual %u\n", i);
+    printf("\tIndividual %u\n", i+1);
     showGenes(ppltn+i);
     showFitness(ppltn+i);
   }

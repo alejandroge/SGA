@@ -61,6 +61,7 @@ void initBitsPerGene(INDIVIDUAL * ind) {
   unsigned short i;
 
   // Initialize bitsPerGene array, with the values from the const array
+  // counts number of bits in the chromosome, saves it to ncbits
   for(i=0; i<NPARAMS; i++) {
     ind->bitsPerGene[i] = NBITS[i];
     ind->ncbits += NBITS[i];

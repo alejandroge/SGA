@@ -1,12 +1,21 @@
-void EvaluatePopulation(INDIVIDUAL * ppltn);  // Iterates over the array of population
+INDIVIDUAL * EvaluatePopulation(INDIVIDUAL * ppltn);  // Iterates over the array of population
 void EvaluateIndividual(INDIVIDUAL * ind);    // Inside here the evaluation function is set
 
-void EvaluatePopulation(INDIVIDUAL * ppltn) {
-  unsigned short i;
+INDIVIDUAL * EvaluatePopulation(INDIVIDUAL * ppltn) {
+  unsigned short i, bestIndex;
 
+  // Compute fitness for each individual
   for(i=0; i<NIND; i++) {
     EvaluateIndividual(ppltn+i);
   } printf("Population evaluated\n");
+
+  // Looks for best fitness index
+  bestIndex = 0;
+  for(i=1; i<NIND; i++)
+    if( ppltn[i].fitness < ppltn[bestIndex].fitness ) bestIndex = i;
+
+  // returns Individual with the best fitness
+  return ppltn+bestIndex;
 }
 
 void EvaluateIndividual(INDIVIDUAL * ind) {
