@@ -6,8 +6,9 @@ INDIVIDUAL * EvaluatePopulation(INDIVIDUAL * ppltn) {
 
   // Compute fitness for each individual
   for(i=0; i<NIND; i++) {
+    computeRealValues(ppltn+i);
     EvaluateIndividual(ppltn+i);
-  } printf("Population evaluated\n");
+  } //printf("Population evaluated\n");
 
   // Looks for best fitness index
   bestIndex = 0;

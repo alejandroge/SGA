@@ -10,7 +10,7 @@ unsigned char initPopulation(INDIVIDUAL * ppltn) {
       printf("Cannot initialize Individual n. %u\n", i);
       return 1;
     }
-  } printf("Population initialized\n");
+  } // printf("Population initialized\n");
 
   return 0;
 }
@@ -30,7 +30,7 @@ INDIVIDUAL * allocPopulation() {
       printf("Failed trying to allocate memory for Genes and bitsPerGene arrays\n");
       return NULL;
     }
-  } printf("Population allocated\n");
+  } // printf("Population allocated\n");
 
   return ppltn;
 }
@@ -39,6 +39,7 @@ void showPopulation(INDIVIDUAL * ppltn) {
   unsigned short i;
 
   for(i=0; i<NIND; i++) {
+    showChromosome(ppltn+i);
     printf("\tIndividual %u\n", i+1);
     showGenes(ppltn+i);
     showFitness(ppltn+i);
