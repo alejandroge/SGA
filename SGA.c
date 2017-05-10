@@ -42,7 +42,8 @@ int main(int argc, char const *argv[]) {
   bestInd = EvaluatePopulation(ppltn);
   //showPopulation(ppltn);
   // Stop condition
-  while(nGeneration < GLIMIT && bestInd->fitness > 0.05) {
+  while(/*nGeneration < GLIMIT && */bestInd->fitness > 0.001) {
+
     Crosstable=rouletteSelection(ppltn, Crosstable);
     // printf("Cross table computed\n");
     nCrossed = crossPopulation(ppltn, newPpltn, Crosstable, newInds);
@@ -51,6 +52,7 @@ int main(int argc, char const *argv[]) {
     bestInd = EvaluatePopulation(ppltn);
     // showPopulation(ppltn);
     nGeneration++;
+
   }
   printf("\nBest Individual, generation %u\n", nGeneration-1);
   showGenes(bestInd);

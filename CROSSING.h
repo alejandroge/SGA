@@ -11,8 +11,6 @@ unsigned short crossPopulation(INDIVIDUAL * ppltn, INDIVIDUAL * newPpltn, unsign
 
   for(i=0; i<NIND/2; i++) {
     if(rand()/(double)RAND_MAX <= 0.8) {
-      //showChromosome(ppltn+Crosstable[i][0]);
-      //showChromosome(ppltn+Crosstable[i][1]);
       newInds[count] = Crosstable[i][0];
       newInds[count+1] = Crosstable[i][1];
       count+=2;
